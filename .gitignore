@@ -1,0 +1,13 @@
+# secrets
+.env
+*.local
+
+# client work + generated outputs (keep the folder, ignore contents)
+clients/*/
+!clients/.gitkeep
+
+# OS / editor
+.DS_Store
+node_modules/
+__pycache__/
+*.pyc

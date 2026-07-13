@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "meta-ads": {
+      "command": "uvx",
+      "args": ["meta-ads-mcp"],
+      "env": {
+        "PIPEBOARD_API_TOKEN": "${PIPEBOARD_API_TOKEN}"
+      }
+    },
+    "apify": {
+      "command": "npx",
+      "args": ["-y", "@apify/actors-mcp-server"],
+      "env": {
+        "APIFY_TOKEN": "${APIFY_TOKEN}"
+      }
+    },
+    "exa": {
+      "command": "npx",
+      "args": ["-y", "exa-mcp-server"],
+      "env": {
+        "EXA_API_KEY": "${EXA_API_KEY}"
+      }
+    }
+  }
+}
