@@ -48,12 +48,24 @@ If an angle cannot be made compliant, drop it and note why. Never ship a non-com
 The master skill `clinic-campaign` orchestrates the stages. You can also run any stage on its own.
 
 1. `market-research` - buyer spectrum read plus Meta Ads Library scrape.
-2. `angles` - 25 to 30 compliant reasons to convert.
-3. `scripts-and-copy` - 5 headlines, 5 body copies, and a video script per angle.
-4. `statics` - generate the static ad images.
+2. `angles` - 25 to 30 compliant reasons to convert. Consults the **advisors** (see below).
+3. `scripts-and-copy` - 5 headlines, 5 body copies, and a video script per angle. Written through the **Schwartz copywriter** with a **Hormozi** hook pass.
+4. `statics` - generate the static ad images. Creative direction from the **Mark** advisor.
 5. `launch` - build the campaign, ad sets, ads, and upload creatives to Meta.
 
 Each stage writes its output into `clients/<client-slug>/` so the next stage reads it. Never hold the whole run only in memory.
+
+## The advisors (grounded persona brains)
+
+Three grounded advisors sharpen the creative. Each is a skill that reads its own corpus in `knowledge/<persona>/` (a one-page `_*-primer.md` every call, the full corpus only for depth). Portable: plain markdown, no gbrain, no embeddings.
+
+- **copywriter-schwartz** (`/copywriter`) - Eugene Schwartz's Breakthrough Advertising. The copy engine. Diagnoses market awareness and sophistication, then writes and judges angles, headlines, and body. This is the theory under the buyer spectrum in `knowledge/haynes-method.md`.
+- **advisor-hormozi** (`/ask-hormozi`) - offer, value equation, hook strength, risk-reversal on the process (never a clinical result).
+- **advisor-mark** (`/ask-mark`) - Mark Builds Brands, creative and brand style, how the ad looks and feels. Corpus built by Daniel via `/build-advisor mark`; ships as a stub primer.
+
+**How the pipeline uses them:** `angles` diagnoses awareness/sophistication with Schwartz, sharpens each angle's hook/offer with Hormozi, and takes format cues from Mark. `scripts-and-copy` writes through Schwartz with a Hormozi hook pass. `statics` takes creative direction from Mark. The advisors inform; they never override the compliance rail. A persuasive line that breaches `knowledge/singapore-ad-compliance.md` is not usable, revise it. Compliance always wins.
+
+To build or refresh an advisor corpus, use `build-advisor` (`/build-advisor <name>`).
 
 ## Tools you rely on
 

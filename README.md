@@ -12,6 +12,16 @@ Drop this folder into Claude Code, fill an intake, and it produces market resear
 - **Statics.** Generated static ad images, compliance-checked (no before/after, no results depiction, no superlatives).
 - **Launch.** Builds the campaign in Meta, paused: one cold campaign, three ad sets (broad, interest stack, lookalike stack), the same ads and copy in each, ABO budgets, auto-features off. Never goes live without your yes.
 
+## Grounded advisors
+
+Three persona brains sharpen the creative, each grounded in its own markdown corpus (portable, no gbrain, no embeddings):
+
+- **Schwartz copywriter** (`/copywriter`) - Eugene Schwartz's Breakthrough Advertising, the copy engine. Ships with the full book.
+- **Hormozi** (`/ask-hormozi`) - offer, value equation, hooks, risk reversal. Ships with the corpus.
+- **Mark Builds Brands** (`/ask-mark`) - creative and brand style. Build the corpus with `/build-advisor mark` (Apify scrape of the channel).
+
+They plug into the pipeline (angles, copy, statics) and can also be queried standalone. They inform; compliance always wins.
+
 ## Method and compliance
 
 - The method lives in `knowledge/haynes-method.md`. It is the spine: 25 to 30 unique concepts, 3 ad sets, ABO, 1 to 3 winners by design, the duplicate-and-scale loop, the lead-quality gate.
@@ -19,13 +29,14 @@ Drop this folder into Claude Code, fill an intake, and it produces market resear
 
 ## Setup
 
-1. Copy this folder somewhere and open it in Claude Code.
+1. Clone this repo and open it in Claude Code.
 2. Set the environment variables the MCP servers need (see `.mcp.json`):
    - `PIPEBOARD_API_TOKEN` - Meta Ads access via Pipeboard (run the meta-ads-mcp login flow to get one, or set `META_ACCESS_TOKEN` directly).
-   - `APIFY_TOKEN` - Meta Ads Library scraping.
+   - `APIFY_TOKEN` - Meta Ads Library scraping and the Mark Builds Brands corpus build.
    - `EXA_API_KEY` - web research.
    - `OPENAI_API_KEY` - static image generation (gpt-image).
 3. Restart Claude Code so the MCP servers load.
+4. **Run the bootstrap.** Paste `BOOTSTRAP.md` into Claude Code (or say "run BOOTSTRAP.md"). It checks your env, builds the Mark Builds Brands corpus, distils the primers, optionally runs graphify, and self-tests the engine on a sample intake. Idempotent, safe to re-run.
 
 ## Run
 
@@ -38,11 +49,15 @@ You can also run any stage on its own: `/market-research`, `/angles`, `/scripts-
 
 ```
 CLAUDE.md                     the orchestration brain (read first)
+BOOTSTRAP.md                  the master prompt: builds corpora, self-tests the engine
 knowledge/
   haynes-method.md            the ad method
   singapore-ad-compliance.md  the compliance rail
+  hormozi/                    Hormozi corpus + primer (ships built)
+  breakthrough-advertising/   Schwartz book + primer (ships built)
+  mark-builds-brands/         built by /build-advisor mark (ships as a stub)
 templates/intake.md           the intake form
-.claude/skills/               the six pipeline skills
+.claude/skills/               10 skills: 6 pipeline + 3 advisors + build-advisor
 clients/<slug>/               per-client intake + all stage outputs
 .mcp.json                     Meta Ads, Apify, Exa wiring
 ```
