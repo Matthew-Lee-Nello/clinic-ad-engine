@@ -31,7 +31,7 @@ They plug into the pipeline (angles, copy, statics) and can also be queried stan
 
 1. Clone this repo and open it in Claude Code.
 2. Set the environment variables the MCP servers need (see `.mcp.json`):
-   - `PIPEBOARD_API_TOKEN` - Meta Ads access via Pipeboard (run the meta-ads-mcp login flow to get one, or set `META_ACCESS_TOKEN` directly).
+   - `META_ACCESS_TOKEN` - Meta Ads access (a Meta system-user token for the ad account; the same `meta-ads-mcp` package and auth our proven NELLO setup uses). Or `PIPEBOARD_API_TOKEN` for Pipeboard's one-click OAuth instead.
    - `APIFY_TOKEN` - Meta Ads Library scraping and the Mark Builds Brands corpus build.
    - `EXA_API_KEY` - web research.
    - `OPENAI_API_KEY` - static image generation (gpt-image).

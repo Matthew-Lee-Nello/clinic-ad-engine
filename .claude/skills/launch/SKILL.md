@@ -9,9 +9,9 @@ Turn the angles, copy, and statics into a live-ready Meta campaign following the
 
 Tools: the `meta-ads` MCP (the Pipeboard `meta-ads-mcp` package). Load tool schemas with ToolSearch `select:` before calling. If a call fails, report the exact error, do not work around it. This skill follows our proven NELLO creative-upload playbook exactly - do not invent a different build path.
 
-## Auth (Pipeboard)
+## Auth (same as the proven NELLO setup)
 
-Daniel authorises his own Meta ad account through Pipeboard: connect the account at pipeboard.co, then set `PIPEBOARD_API_TOKEN` in the env (already referenced in `.mcp.json`). Alternatively a direct `META_ACCESS_TOKEN` works with the same package. Never check or print the token; just call the tools.
+This uses the `meta-ads-mcp` package with a direct **`META_ACCESS_TOKEN`** - the exact auth mode our NELLO and Alister accounts run on, so the whole path is proven. Daniel generates a Meta system-user token for his ad account and sets `META_ACCESS_TOKEN` in the env (referenced in `.mcp.json`). Easier-but-unproven alternative: the same package also accepts `PIPEBOARD_API_TOKEN` (Pipeboard's hosted OAuth login) if he prefers a one-click connect. Never check or print the token; just call the tools.
 
 ## Preflight
 

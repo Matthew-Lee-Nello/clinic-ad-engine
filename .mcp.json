@@ -4,7 +4,7 @@
       "command": "uvx",
       "args": ["meta-ads-mcp"],
       "env": {
-        "PIPEBOARD_API_TOKEN": "${PIPEBOARD_API_TOKEN}"
+        "META_ACCESS_TOKEN": "${META_ACCESS_TOKEN}"
       }
     },
     "apify": {
