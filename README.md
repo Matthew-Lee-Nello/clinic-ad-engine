@@ -6,7 +6,7 @@ Drop this folder into Claude Code, fill an intake, and it produces market resear
 
 ## What it does
 
-- **Research.** Buyer-spectrum market read (awareness and sophistication) plus a Meta Ads Library scrape of what competitors run and for how long.
+- **Research (the core).** A rigorous, repeatable research engine that produces one standard **Market & Strategy Brief** per treatment: client core (from the Drive folder), treatment research, **TAM/SAM/SOM market sizing**, competitor scan **plus cross-market ad swiping** (read the image or video, adapt the concept compliantly), the positioning wedge, and the game plan. Same shape every client - that repeatability is what lets Daniel scale. The brief is reviewed and approved before any creative is written.
 - **Angles.** 25 to 30 genuinely distinct reasons to convert, spread across the buyer spectrum, anchored to the doctor's real point of difference. Every angle passes a compliance gate first.
 - **Copy and scripts.** One shared pool of 5 headlines and 5 body copies, plus a short video script per angle for the doctor to film.
 - **Statics.** Generated static ad images, compliance-checked (no before/after, no results depiction, no superlatives).
@@ -35,8 +35,9 @@ They plug into the pipeline (angles, copy, statics) and can also be queried stan
    - `APIFY_TOKEN` - Meta Ads Library scraping and the Mark Builds Brands corpus build.
    - `EXA_API_KEY` - web research.
    - `OPENAI_API_KEY` - static image generation (gpt-image).
-3. Restart Claude Code so the MCP servers load.
-4. **Run the bootstrap.** Paste `BOOTSTRAP.md` into Claude Code (or say "run BOOTSTRAP.md"). It checks your env, builds the Mark Builds Brands corpus, distils the primers, optionally runs graphify, and self-tests the engine on a sample intake. Idempotent, safe to re-run.
+3. **Connect Google Drive via Composio.** The research engine reads each client's Drive folder (doctor media + onboarding) through your Composio Google Drive connection. Connect it once in Composio; the `client-core` skill uses it. If Composio isn't connected, drop the client folder locally and point the engine at the path instead.
+4. Restart Claude Code so the MCP servers load.
+5. **Run the bootstrap.** Paste `BOOTSTRAP.md` into Claude Code (or say "run BOOTSTRAP.md"). It checks your env, builds the Mark Builds Brands corpus, distils the primers, optionally runs graphify, and self-tests the engine end to end (a full research brief + compliant creative). Idempotent, safe to re-run.
 
 ## Run
 
@@ -53,13 +54,22 @@ BOOTSTRAP.md                  the master prompt: builds corpora, self-tests the 
 knowledge/
   haynes-method.md            the ad method
   singapore-ad-compliance.md  the compliance rail
+  tam-methodology.md          repeatable TAM/SAM/SOM market sizing
+  swipe-method.md             read + adapt a winning ad, compliantly
   hormozi/                    Hormozi corpus + primer (ships built)
   breakthrough-advertising/   Schwartz book + primer (ships built)
   mark-builds-brands/         built by /build-advisor mark (ships as a stub)
-templates/intake.md           the intake form
-.claude/skills/               10 skills: 6 pipeline + 3 advisors + build-advisor
-clients/<slug>/               per-client intake + all stage outputs
-.mcp.json                     Meta Ads, Apify, Exa wiring
+templates/
+  market-strategy-brief.md    the standard research deliverable
+  intake.md                   optional intake form
+.claude/skills/               17 skills:
+  research engine: market-research + client-core, treatment-research,
+                   market-sizing, competitor-swipe, positioning, strategy-brief, swipe
+  creative:        angles, scripts-and-copy, statics, launch
+  advisors:        copywriter-schwartz, advisor-hormozi, advisor-mark, build-advisor
+  orchestrator:    clinic-campaign
+clients/<slug>/               per-client brief (00-brief.md) + all stage outputs
+.mcp.json                     Meta Ads, Apify, Exa wiring (Drive via Composio)
 ```
 
 ## Non-negotiables

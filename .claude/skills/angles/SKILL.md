@@ -7,7 +7,9 @@ description: Generate 25-30 distinct, compliant reasons-to-convert (angles) for 
 
 Produce 25 to 30 genuinely distinct angles, each a different reason to convert. This is the heart of the Jeremy Haynes method: messaging diversification, not variation. Output to `clients/<slug>/02-angles.md`.
 
-Read `clients/<slug>/01-research.md`, `knowledge/haynes-method.md`, and `knowledge/singapore-ad-compliance.md` first.
+**Generate FROM the approved brief.** Read `clients/<slug>/00-brief.md` first (it must be approved - check the approval box; if not approved, stop and say so). The angle territory (brief section 6), the swiped concepts (section 4), the positioning wedge (section 5), and the buyer-spectrum diagnosis are your raw material. Then read `knowledge/haynes-method.md` and `knowledge/singapore-ad-compliance.md`.
+
+Consult the advisors as you generate: **copywriter-schwartz** (awareness/sophistication per angle), **advisor-hormozi** (sharpen each hook/offer), **advisor-mark** (format/style). The brief already did the diagnosis, so use it, do not re-run research here.
 
 ## What "distinct" means
 

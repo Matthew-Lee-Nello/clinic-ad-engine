@@ -6,15 +6,12 @@ Read this whole file before acting. Then read `knowledge/haynes-method.md` and `
 
 ## What you produce for a new treatment
 
-Given an intake (the doctor's point of difference, the treatment, the country), you produce, in one run:
+Given a client's Drive folder, a treatment, and a country, you produce:
 
-1. A market read on the buyer spectrum (awareness and sophistication for that treatment in that country).
-2. Meta Ads Library research: what is already running, for how long, and what angles competitors use.
-3. 25 to 30 distinct, compliant angles, each a different reason to convert.
-4. 5 headlines and 5 body-copy pieces, one shared pool for all ads.
-5. Static ad concepts, generated as images.
-6. Video ad scripts for the doctor to film.
-7. The launch structure and, when asked, the live campaign built in Meta.
+1. A rigorous **Market & Strategy Brief** (`00-brief.md`): client core, treatment research, TAM/SAM/SOM, competitor scan + swiped concepts, positioning wedge, and the game plan. This is the core deliverable and it is reviewed before anything else runs.
+2. Then, from the approved brief: 25 to 30 distinct compliant angles, the 5+5 shared copy pool, static ad concepts, video ad scripts, and the launch structure (and, when asked, the paused campaign in Meta).
+
+The brief is the heart. The creative is downstream of it.
 
 ## The method (Jeremy Haynes, current)
 
@@ -47,13 +44,29 @@ If an angle cannot be made compliant, drop it and note why. Never ship a non-com
 
 The master skill `clinic-campaign` orchestrates the stages. You can also run any stage on its own.
 
-1. `market-research` - buyer spectrum read plus Meta Ads Library scrape.
-2. `angles` - 25 to 30 compliant reasons to convert. Consults the **advisors** (see below).
-3. `scripts-and-copy` - 5 headlines, 5 body copies, and a video script per angle. Written through the **Schwartz copywriter** with a **Hormozi** hook pass.
-4. `statics` - generate the static ad images. Creative direction from the **Mark** advisor.
-5. `launch` - build the campaign, ad sets, ads, and upload creatives to Meta.
+**Research is the core.** The front-of-funnel thinking (understand the client, size the market, study competitors, swipe winning concepts, find the wedge, write the game plan) is the hardest, most valuable part and the thing that makes this repeatable across clients. Do it first, do it rigorously, the same way every time.
 
-Each stage writes its output into `clients/<client-slug>/` so the next stage reads it. Never hold the whole run only in memory.
+### Phase A - the research engine (run first)
+`market-research` runs six stages into ONE standard Market & Strategy Brief (`clients/<slug>/00-brief.md`):
+1. `client-core` - ingest the client's Google Drive folder (via Composio) → the doctor's real point of difference and profile.
+2. `treatment-research` - the treatment, patient journey, real objections and questions, country nuances.
+3. `market-sizing` - TAM / SAM / SOM per `knowledge/tam-methodology.md`, with a bottom-up funnel cross-check. Daniel asks "what's the TAM?" for every treatment; this answers it rigorously.
+4. `competitor-swipe` - Meta Ad Library scan PLUS swiping winning concepts from ANY market (read the image or the video transcript, adapt the concept compliantly, per `knowledge/swipe-method.md`). Swiping is first-class.
+5. `positioning` - market gaps × the doctor's leverage = the wedge, plus the buyer-spectrum diagnosis (Schwartz).
+6. `strategy-brief` - synthesise into the concrete, highest-probability game plan and finalise the brief.
+
+### GATE
+Daniel reviews and approves `00-brief.md` before any creative is written. Research quality decides everything downstream.
+
+### Phase B - creative + launch (only after approval)
+7. `angles` - 25 to 30 compliant reasons to convert, generated FROM the approved brief, consulting the **advisors** (below).
+8. `scripts-and-copy` - 5 headlines, 5 body copies, a video script per angle. Through the **Schwartz copywriter** with a **Hormozi** hook pass.
+9. `statics` - static ad images. Creative direction from the **Mark** advisor.
+10. `launch` - build the campaign in Meta, paused.
+
+Each stage writes its output into `clients/<client-slug>/` so the next reads it. Never hold the whole run only in memory.
+
+Standalone: `swipe` reads any single ad and returns a compliant adaptation brief.
 
 ## The advisors (grounded persona brains)
 

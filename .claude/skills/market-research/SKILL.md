@@ -1,44 +1,31 @@
 ---
 name: market-research
-description: Best-in-class research agent for a clinic treatment. Produces a buyer-spectrum market read (awareness + sophistication) and scrapes the Meta Ads Library for what competitors are running and for how long. Trigger with "/market-research", "research this treatment", "what's running in the ad library for X".
+description: Entry point to the research engine. Runs the full research pipeline (client-core, treatment-research, market-sizing, competitor-swipe, positioning, strategy-brief) into one Market & Strategy Brief, then stops for review. Trigger with "/market-research", "research this treatment", "build the strategy brief".
 ---
 
-# market-research
+# market-research (the research engine entry point)
 
-Two jobs: read the market on the buyer spectrum, and scrape the Meta Ads Library for structural inspiration. Output to `clients/<slug>/01-research.md`.
+Research is the core of this system and the thing that makes it scale across clients: the same rigorous pipeline, the same standard brief, every treatment. This skill runs the whole pipeline; the six stage skills below do the work and each writes into one brief.
 
-## Part 1: buyer-spectrum market read
+If the intake or Drive folder is thin, ask for the client's Drive folder (via Composio) or a local path and the doctor's point of difference before starting.
 
-Using web research (Exa or Tavily) plus the intake, work out for THIS treatment in THIS country:
+## Run the stages in order
 
-- **Awareness stage.** Does the public know the treatment exists, know the mechanism, or are they comparing providers? This sets whether a simple claim or a unique-mechanism angle converts (see `knowledge/haynes-method.md`, buyer spectrum).
-- **Sophistication stage.** How many providers are already making similar claims? The more crowded, the more you must lead with a specific mechanism and process.
-- **The real questions the market asks** about this treatment (pain, cost, recovery, safety, "does it work for me"). Pull these from forums, search suggestions, and competitor pages.
-- **The doctor's leverage.** Where the doctor's real point of difference (from the intake) meets a gap the market cares about.
+Create `clients/<slug>/00-brief.md` from `templates/market-strategy-brief.md`, then run each stage, which fills its section:
 
-Do not invent numbers. Cite where a claim comes from.
+1. **client-core** - ingest the client's Drive folder + intake → the client profile (section 1). Point of difference above all.
+2. **treatment-research** - the treatment, the patient journey, real questions and objections, country nuances (section 2).
+3. **market-sizing** - TAM / SAM / SOM per `knowledge/tam-methodology.md`, with the bottom-up cross-check (section 3).
+4. **competitor-swipe** - Meta Ad Library scan + cross-market swiped concepts per `knowledge/swipe-method.md` (section 4).
+5. **positioning** - market gaps × the doctor's leverage = the wedge, plus the buyer-spectrum diagnosis (section 5).
+6. **strategy-brief** - synthesise into the game plan and finalise the brief (section 6).
 
-## Part 2: Meta Ads Library scrape
+## Then stop for the gate
 
-Goal: see what is already running in and around this niche, and how long ads have been live (longevity is a rough signal a competitor keeps paying for an ad). Structure and format inspiration only. Never lift a competitor's angle wholesale, and never copy anything non-compliant.
+Hand `00-brief.md` to Daniel for review. Nothing creative runs until he approves it (the approval checkbox in the brief). Research quality decides everything downstream.
 
-Preferred tool: **Apify** Facebook Ads Library scraper.
+## Rules
 
-1. Find the actor: `search-actors` for "facebook ads library". Common actor: `apify/facebook-ads-scraper` or an equivalent Ad Library actor.
-2. `fetch-actor-details` to get the input schema.
-3. `call-actor` with input for the country and search terms (treatment names, competitor page names from the intake). Set the ad-active status and country.
-4. `get-dataset-items` to pull results. Capture for each ad: page name, ad copy, media type (image/video), first-seen date (for longevity), and the creative angle.
-
-Fallback for a single known Ad Library URL: **Crawl4AI** `md` on the URL, or `crawl` for a set of URLs.
-
-Fallback if scraping is blocked: use the Meta Ad Library website directly and record what you can, and note the limitation. Never fabricate ads that are not there.
-
-## Output (`01-research.md`)
-
-- Buyer-spectrum verdict: awareness stage, sophistication stage, and the messaging implication.
-- The top real questions the market asks.
-- A short table of competitor ads found: page, media type, longevity, the angle they use, and whether it would be compliant here.
-- Three to five structural or format observations worth borrowing (not angles to copy).
-- Where the doctor's point of difference gives an opening.
-
-Note honestly if the exact-niche library is thin or empty. That is common and expected in restricted niches: it means you generate angles from first principles (buyer spectrum + point of difference), not from a swipe file.
+- Never fabricate a figure, a market question, or an ad. Source or label every claim.
+- Compliance rail applies to everything that will become an ad (`knowledge/singapore-ad-compliance.md`).
+- Portable: plain markdown, web research, Apify, Composio for Drive. No gbrain, no embeddings.

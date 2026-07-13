@@ -47,13 +47,14 @@ This is navigation only. The engine works fully without it. Skip on any doubt.
 
 ## Step 5 - Self-test the engine (dry run, nothing goes live)
 
-Create a throwaway sample intake at `clients/_selftest/intake.md` for a plausible treatment (for example: a rhinoplasty clinic in Singapore, doctor with a named surgical technique as the point of difference). Then run the pipeline in dry mode:
+Create a throwaway sample at `clients/_selftest/` for a plausible treatment (for example: a rhinoplasty clinic in Singapore, doctor with a named surgical technique as the point of difference). Then run the pipeline in dry mode, research first:
 
-1. `market-research` - produce a buyer-spectrum read (awareness and sophistication) and note the Ad Library step (a real scrape if `APIFY_TOKEN` is set, otherwise note it as skipped).
-2. `angles` - generate at least 25 compliant angles, consulting Schwartz (awareness/sophistication), Hormozi (hook/offer), and Mark (style). Confirm each angle passes the compliance check, and that dropped angles are logged with reasons.
-3. `scripts-and-copy` - produce the 5 headlines and 5 body copies and two sample video scripts, written through Schwartz with a Hormozi hook pass, all compliant.
-4. `statics` - describe (do not necessarily generate) two static concepts, confirming they carry no before/after, no results depiction, no superlatives.
-5. `launch` - produce the launch PLAN only (`clients/_selftest/04-launch-plan.md`): campaign, 3 ad sets, ABO budgets, the ad-to-angle map. Do NOT create anything in Meta during the self-test.
+1. **Research engine** (`market-research`) - produce a full `clients/_selftest/00-brief.md`: client core, treatment research, a **TAM/SAM/SOM estimate with stated sources/assumptions and a bottom-up cross-check** (per `knowledge/tam-methodology.md`), a competitor scan (real Apify scrape if `APIFY_TOKEN` is set, else noted), at least two **swiped cross-market concepts** with compliant adaptations, the positioning wedge, and the game plan. This brief is the main thing to verify.
+2. **Gate check** - confirm the brief stops for approval and that the creative stages refuse to run on an unapproved brief. Then, for the self-test only, treat it as approved and continue.
+3. `angles` - generate at least 25 compliant angles FROM the brief, consulting Schwartz, Hormozi, and Mark. Confirm each passes compliance and dropped angles are logged.
+4. `scripts-and-copy` - the 5 headlines and 5 body copies and two sample video scripts, Schwartz + Hormozi, compliant.
+5. `statics` - describe (do not necessarily generate) two static concepts, no before/after, no results depiction, no superlatives.
+6. `launch` - the launch PLAN only (`clients/_selftest/04-launch-plan.md`). Do NOT create anything in Meta during the self-test.
 
 ## Step 6 - Green/red checklist
 
@@ -63,7 +64,9 @@ Print a checklist with PASS or FAIL for each:
 - [ ] Hormozi corpus present.
 - [ ] Schwartz corpus present (real text).
 - [ ] Mark corpus built (or noted as pending on `APIFY_TOKEN`).
-- [ ] Self-test produced 25+ compliant angles.
+- [ ] Self-test produced a full research brief (`00-brief.md`) with a TAM/SAM/SOM estimate and 2+ swiped concepts.
+- [ ] The brief gate held (creative refused to run unapproved).
+- [ ] Self-test produced 25+ compliant angles from the brief.
 - [ ] Self-test copy passed the compliance rail.
 - [ ] Launch plan generated (nothing set live).
 
