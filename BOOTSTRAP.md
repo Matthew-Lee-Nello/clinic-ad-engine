@@ -1,5 +1,7 @@
 # BOOTSTRAP - run this once to make the engine live
 
+New to this repo? Do the setup in [START-HERE.md](START-HERE.md) first (keys, Meta, Composio Drive), then run this.
+
 Paste this whole file into Claude Code inside the `clinic-ad-engine` repo, or say "run BOOTSTRAP.md". It is self-contained and idempotent: it only builds what is missing and is safe to re-run. It never sets an ad campaign live.
 
 ---

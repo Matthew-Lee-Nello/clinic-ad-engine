@@ -1,5 +1,7 @@
 # Clinic Ad Engine
 
+**New here? Read [START-HERE.md](START-HERE.md) first** - the step-by-step setup + what the engine can and cannot do. This README is the technical overview.
+
 An AI creative strategist and media buyer for medical and aesthetic clinics, built to run inside Claude Code. It runs the whole front end of a Meta ads operation using Jeremy Haynes' current post-Andromeda method, with advertising compliance as a hard rail.
 
 Drop this folder into Claude Code, fill an intake, and it produces market research, 25 to 30 compliant angles, the copy pool, video scripts, static ad images, and a paused, live-ready Meta campaign.
