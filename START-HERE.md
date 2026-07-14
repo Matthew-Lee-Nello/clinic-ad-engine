@@ -33,9 +33,10 @@ The big idea: it does the **research first**, produces one standard brief, and y
 ## Before you start, you need
 
 - **Claude Code** installed and working (you already use it).
-- **A Meta ad account** you can access, and the ability to make a token for it (below).
+- **Node** and **uv** installed - the two things the connectors run on. Check in a terminal: `node -v` and `uv --version`. If either says "command not found": `brew install node uv` on a Mac, otherwise see nodejs.org and docs.astral.sh/uv.
+- **A Meta ad account** you can access, and a token for it (Step 2 shows two ways).
 - Four keys: **Meta**, **Apify**, **Exa**, **OpenAI**. Where to get each is in Step 2.
-- **Composio** with **Google Drive connected** (you have Composio already). This is how it reads each client's folder.
+- A way for it to read each client's folder: either the folder **downloaded to your machine** (simplest, works today) or your **Composio Google Drive** connection (optional, set up later). Step 2 covers both.
 
 ---
 
@@ -52,7 +53,16 @@ If you do not use `gh`, download the folder Matt sends and open it in Claude Cod
 
 ## Step 2: Set your keys
 
-The engine reads these from your environment. Put them in a `.env` file in the repo, or export them in your shell. Never share them.
+The engine reads these from your shell environment (not from a file in the repo), so you set them once in your shell. Open a terminal and add these four lines to the end of `~/.zshrc` (with your real values), then close and reopen the terminal:
+
+```
+export META_ACCESS_TOKEN="your-meta-token"
+export APIFY_TOKEN="your-apify-token"
+export EXA_API_KEY="your-exa-key"
+export OPENAI_API_KEY="your-openai-key"
+```
+
+Then launch Claude Code from that terminal so it inherits them. To check they are set: `echo $APIFY_TOKEN` should print your key. Never share these or commit them.
 
 | Key | What it is for | Where to get it |
 |---|---|---|
@@ -68,9 +78,11 @@ The engine reads these from your environment. Put them in a `.env` file in the r
 
 Start with Pipeboard if you want to move fast. Switch to a system-user token later if anything is off.
 
-### Connecting Google Drive (Composio)
+### Giving it the client's folder
 
-In your Composio, connect the **Google Drive** app and authorise it. The engine's `client-core` step uses that connection to read a client's folder. If you would rather not use Composio for a client, you can also just download that client's Drive folder to your machine and point the engine at the local path.
+**Simplest, do this for your first run:** download the client's Google Drive folder to your machine (doctor photos, videos, onboarding notes, their point of difference). When you run a client, give the engine that local folder path. Zero setup, always works.
+
+**Optional upgrade (Composio), set up later:** if you want it to read Drive directly without downloading, connect **Google Drive** in your Composio, then add your Composio Google Drive MCP server to `.mcp.json` (Composio gives you the server details when you connect an app) and restart Claude Code. The `client-core` step will use it automatically. Skip this for now to move fast; the local folder is fine.
 
 ## Step 3: Restart Claude Code
 
@@ -86,9 +98,9 @@ It will check your keys, build the Mark Builds Brands knowledge base (scrapes hi
 
 ## Step 5: Run your first real client
 
-1. Make sure the client's Drive folder is connected in Composio (doctor photos, videos, onboarding notes, their point of difference).
-2. In Claude Code, say: **"run /clinic-campaign for &lt;treatment&gt; in &lt;country&gt;, client folder &lt;drive folder link or name&gt;"**.
-3. It does the research first and writes the brief to `clients/&lt;client&gt;/00-brief.md`. **Read it.** This is the moment that matters. Check the TAM, the positioning, the game plan. If it is right, tick the approval box in the brief. If not, tell it what to fix.
+1. Have the client's folder ready: either downloaded to a local folder, or connected via Composio (doctor photos, videos, onboarding notes, their point of difference).
+2. In Claude Code, say it in plain words, for example: **"run /clinic-campaign for rhinoplasty in Singapore, the client folder is at ~/clients/dr-tan"** (swap in your treatment, country, and folder path).
+3. It does the research first and writes the brief to a file like `clients/dr-tan/00-brief.md`. **Read it.** This is the moment that matters. Check the TAM, the positioning, the game plan. If it is right, tick the approval box in the brief. If not, tell it what to fix.
 4. Once you approve, it writes the 25 to 30 angles, the copy, the video scripts, and the static concepts.
 5. Your doctor films the video angles (the scripts are ready for them).
 6. When you are ready, say **"run /launch"**. It builds the campaign in Meta **paused**. You open Meta, look at it, and only you set it live.
@@ -100,7 +112,7 @@ That is the whole loop. Every new treatment or client, same steps.
 You do not have to run the whole thing. Any of these work standalone:
 - **"/market-research"** or "build the brief for X" - just the research and the brief.
 - **"/market-sizing"** or "what's the TAM for X in Y" - just the market size.
-- **"/swipe &lt;ad link&gt;"** - read one winning ad and get a compliant version for your treatment.
+- **"/swipe"** then paste an ad link - read one winning ad and get a compliant version for your treatment.
 - **"/ask-hormozi"** - pressure-test an offer or a hook.
 - **"/copywriter"** - write or fix copy using the Breakthrough Advertising method.
 - **"/ask-mark"** - creative and brand-style direction (once his corpus is built).
